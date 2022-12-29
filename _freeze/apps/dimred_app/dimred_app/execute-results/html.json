@@ -1,0 +1,14 @@
+{
+  "hash": "a7d698723c9d06c124a9de3a96832b85",
+  "result": {
+    "markdown": "---\ntitle: \"Dimred app\"\nauthor: \"LC\"\ndate: \"2022-12-28\"\ncategories: [shiny app,neuroimaging]\nimage: \"dimred_neuroimaging.jpg\"\nabstract: \"Exploring multidimensional imaging results\"\nexecute:\n  echo: true\npage-layout: article\n\n---\n\n\n\n\n\n# Pippero\n\n![](dimred.gif)\n\n# The app should be below this, but there is no SSL so it's not rendered\n\n\n::: {.cell}\n<iframe src=\"http://psaraki.xyz:3838/neuroimaging_dimred/?showcase=0\" width=\"672\" height=\"2000\" data-external=\"1\"></iframe>\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![](dimred.gif)
 
-# The app
+# The app should be below this, but there is no SSL so it's not rendered
 
 ```{r echo=FALSE}
 knitr::include_app("http://psaraki.xyz:3838/neuroimaging_dimred/", height = 2000)

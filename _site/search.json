@@ -56,11 +56,11 @@
     "text": "Dimred app\n\n\n\n\n\n\n\nshiny app\n\n\nneuroimaging\n\n\n\n\nExploring multidimensional imaging results\n\n\n\n\n\n\nDec 28, 2022\n\n\nLC\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "apps/reflections/dimred_app.html",
-    "href": "apps/reflections/dimred_app.html",
+    "objectID": "apps/dimred_app/dimred_app.html",
+    "href": "apps/dimred_app/dimred_app.html",
     "title": "Dimred app",
     "section": "",
-    "text": "Pippero\n\n\n\nThe app"
+    "text": "Pippero\n\n\n\nThe app should be below this, but there is no SSL so it’s not rendered"
   },
   {
     "objectID": "blog.html",
