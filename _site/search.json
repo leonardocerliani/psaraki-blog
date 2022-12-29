@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "posts/purrr_RManova/purrr_RManova.html",
+    "href": "posts/purrr_RManova/purrr_RManova.html",
+    "title": "How to replace for loops using purrr::map",
+    "section": "",
+    "text": "In many cases you need to repeat the same action across multiple objects, for instance loading many files, or computing summary statistics across many vectors of observations. Instead of repeating the same operation manually for every object - which is not only time consuming, but especially prone to mistakes - you can use for loops.\nHowever for can be quite verbose, and especially in case you need to nest them - i.e. running a loop inside a loop - it can be difficult to inspect the code for errors during the analysis and especially in the future.\nBase R already provides some functions to avoid the creation of for loops, with the family of apply functions. However sometimes the syntax can be different across functions, and still a bit verbose.\nThe tidyverse provides functions that help getting rid of for loops for good using the purrr package. Below there is just an example. More details can be found in the iteration chapter of R for Data Science and in the functionals chapter of Advanced R\n\nlibrary(tidyverse)\nlibrary(kableExtra)\nlibrary(DT)\noptions(digits=2)\n\nLet’s say you collected data in 8 different runs of an experiment. For instance the time, in seconds, spent freezing, running or grooming in 10 participants after a given stimulus in each subsequent run.\nFor our example we will create some random data. The code below creates 8 dataframes with 10 observations for three distinct variables. It already uses the map function that we are going to explain later, so for now you can just disregard it, and come back later to understand what it does as an excercise.\n\n1:8 %>% map( function(x) {\n  tibble(\n    SUBID = map(1:10, ~ paste0(\"sub_\",.x) ) %>% unlist(),\n    freezing = runif(10)*10 * log(x+1),\n    running = runif(10)*10,\n    grooming = runif(10)*10\n  ) %>%\n    write_csv(paste0(\"run_\",x,\".csv\"))\n})\n\nWe obtain 8 csv files with our data.\n\nmyfiles <- list.files(pattern = \".csv\", full.names = T)\nmyfiles\n\n[1] \"./run_1.csv\" \"./run_2.csv\" \"./run_3.csv\" \"./run_4.csv\" \"./run_5.csv\"\n[6] \"./run_6.csv\" \"./run_7.csv\" \"./run_8.csv\"\n\nread.csv(\"run_1.csv\")\n\n    SUBID freezing running grooming\n1   sub_1     3.40   0.438      4.1\n2   sub_2     6.49   5.871      7.5\n3   sub_3     2.95   7.872      6.8\n4   sub_4     4.72   0.678      1.4\n5   sub_5     2.64   6.816      2.2\n6   sub_6     5.28   4.391      7.1\n7   sub_7     3.46   0.070      9.9\n8   sub_8     0.77   8.778      5.6\n9   sub_9     4.78   7.170      8.8\n10 sub_10     3.32   0.055      8.9"
+  },
+  {
+    "objectID": "posts/purrr_RManova/purrr_RManova.html#purrrmap",
+    "href": "posts/purrr_RManova/purrr_RManova.html#purrrmap",
+    "title": "How to replace for loops using purrr::map",
+    "section": "purrr::map",
+    "text": "purrr::map\nNow you want to load everything in the same dataframe (i.e. table), for instance to carry out a RM-ANOVA. You could use a for loop to load all the files:\n\nallruns = vector(mode = \"list\", length = 8)\n\nfor (run in 1:length(allruns)) {\n  allruns[[run]] <- read.csv( myfiles[[run]] )\n}\n\n# allruns\n\nOr you could use the map function inside the purrr package\n\nallruns <- map(myfiles, read.csv)\n\n# allruns\n\nIn other words you passed to every element of the list myfiles the function read.csv\nNote the advantages:\n\nyou do not need to write extra code to initialize an empty list, since the result is automatically stored in a list\nyou don’t need to provide the total number of files,\nthe syntax is much more concise (and when you get used to it, also much more readable)."
+  },
+  {
+    "objectID": "posts/purrr_RManova/purrr_RManova.html#purrrmap2",
+    "href": "posts/purrr_RManova/purrr_RManova.html#purrrmap2",
+    "title": "How to replace for loops using purrr::map",
+    "section": "purrr::map2",
+    "text": "purrr::map2\nTo carry out the RM-ANOVA, you need to combine all the tables into one singe dataframe, but also retain information about the different run.\nThe idea is the same as before: you have a function that creates a column with the run numba in each run’s data table. This means that you want to provide two lists: (1) the list containing the table of each run and (2) the list of filenames.\n\nalldata <- map2(allruns, myfiles, function(run, file) run %>% mutate(run = file)) %>% bind_rows()\n\nor with a more concise syntax:\n\nalldata <- map2_df(allruns, myfiles, ~ .x %>% mutate(run = .y))\n\nYou might have noticed that here I used a specific flavor of map, that is map_df, which returns a dataframe (or a tibble in the tidyverse language) instead of the default list, so that I can drop the final bind_rows()."
+  },
+  {
+    "objectID": "posts/purrr_RManova/purrr_RManova.html#purrrpmap",
+    "href": "posts/purrr_RManova/purrr_RManova.html#purrrpmap",
+    "title": "How to replace for loops using purrr::map",
+    "section": "purrr::pmap",
+    "text": "purrr::pmap\nAs you might expect, there is also a function pmap which allows you to pass an arbitrary number of tables. I personally prefer this syntax since it allows me to pipe the list into it:\n\nalldata <- list(allruns, myfiles) %>% pmap_df(~ .x %>% mutate(run = .y))\n\n\ndatatable(alldata, options = list(dom = 'tp', scrollX = TRUE)) %>%\n  DT::formatRound(\n    columns = alldata %>% select(where(is.numeric)) %>% colnames(), \n    digits=2\n  )"
+  },
+  {
+    "objectID": "posts/purrr_RManova/purrr_RManova.html#map-is-similar-to-group_by-for-dataframes",
+    "href": "posts/purrr_RManova/purrr_RManova.html#map-is-similar-to-group_by-for-dataframes",
+    "title": "How to replace for loops using purrr::map",
+    "section": "map is similar to group_by for dataframes",
+    "text": "map is similar to group_by for dataframes\nFinally, note that the map function - and its variation, such as pmap, is a similar operator for list to the group_by operator inside dataframes.\nFor instance let’s say that you want to get the mean and standard deviation for every variable in each run:\n\ndescriptives <- alldata %>% \n  group_by(run) %>%\n  summarise(\n    across(where(is.numeric), list(mean = mean, sd = sd)),\n    .groups = \"drop\"\n  ) %>% ungroup() \n\n\ndescriptives %>% \n  kbl() %>% kable_styling(bootstrap_options = c(\"striped\", \"hover\"))\n\n\n\n \n  \n    run \n    freezing_mean \n    freezing_sd \n    running_mean \n    running_sd \n    grooming_mean \n    grooming_sd \n  \n \n\n  \n    ./run_1.csv \n    3.8 \n    1.6 \n    4.2 \n    3.5 \n    6.2 \n    2.9 \n  \n  \n    ./run_2.csv \n    4.3 \n    2.5 \n    6.3 \n    2.4 \n    3.6 \n    2.1 \n  \n  \n    ./run_3.csv \n    7.0 \n    4.1 \n    4.8 \n    2.7 \n    6.4 \n    3.0 \n  \n  \n    ./run_4.csv \n    10.9 \n    3.3 \n    3.9 \n    2.7 \n    3.3 \n    2.2 \n  \n  \n    ./run_5.csv \n    8.7 \n    4.0 \n    4.9 \n    2.7 \n    4.4 \n    2.7 \n  \n  \n    ./run_6.csv \n    7.8 \n    5.0 \n    6.2 \n    2.1 \n    4.4 \n    2.2 \n  \n  \n    ./run_7.csv \n    9.7 \n    5.8 \n    3.7 \n    2.3 \n    6.4 \n    2.6 \n  \n  \n    ./run_8.csv \n    13.2 \n    5.9 \n    3.3 \n    2.8 \n    5.4 \n    3.4"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "It is time to make a blog…",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "LC",
+    "section": "",
+    "text": "leonardo cerliani\nneuroimaging data analyst"
+  },
+  {
+    "objectID": "apps.html",
+    "href": "apps.html",
+    "title": "Shiny apps",
+    "section": "",
+    "text": "Dimred app\n\n\n\n\n\n\n\nshiny app\n\n\nneuroimaging\n\n\n\n\nExploring multidimensional imaging results\n\n\n\n\n\n\nDec 28, 2022\n\n\nLC\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "apps/reflections/dimred_app.html",
+    "href": "apps/reflections/dimred_app.html",
+    "title": "Dimred app",
+    "section": "",
+    "text": "Pippero\n\n\n\nThe app"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "blog",
+    "section": "",
+    "text": "How to replace for loops using purrr::map\n\n\n\n\n\n\n\npurrr\n\n\n\n\n\n\n\n\n\n\n\nDec 26, 2022\n\n\nLC\n\n\n\n\n\n\n  \n\n\n\n\nIt is time to make a blog…\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nDec 23, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+  }
+]

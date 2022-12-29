@@ -1,0 +1,27 @@
+project:
+  type: website
+
+website:
+  title: "LC"
+  site-url: https://psaraki.xyz/
+  navbar:
+    left:
+      - text: about
+        href: index.Rmd
+      - text: blog
+        href: blog.qmd
+      - text: apps
+        href: apps.qmd
+      - text: publications
+        href: blog.qmd
+        
+format:
+  html:
+    theme: journal
+    max-width: 300px
+    mainfont: Georgia
+    css: styles.css
+    page-layout: article
+
+editor: visual
+

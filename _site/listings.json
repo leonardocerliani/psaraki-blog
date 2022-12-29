@@ -1,0 +1,15 @@
+[
+  {
+    "listing": "/apps.html",
+    "items": [
+      "/apps/reflections/dimred_app.html"
+    ]
+  },
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/purrr_RManova/purrr_RManova.html",
+      "/posts/welcome/index.html"
+    ]
+  }
+]

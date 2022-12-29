@@ -1,0 +1,14 @@
+{
+  "hash": "94be00ffe80b173e8e02f376bbf65ac0",
+  "result": {
+    "markdown": "---\ntitle: \"Reflections\"\nauthor: \"LC\"\ndate: \"2022-12-28\"\ncategories: [shiny app,prose]\nimage: \"magkaki.jpg\"\nexecute:\n  echo: true\npage-layout: article\n\n---\n\n\n\n::: {.cell}\n<iframe src=\"http://psaraki.xyz:3838/neuroimaging_dimred/?showcase=0\" width=\"672\" height=\"2000\" data-external=\"1\"></iframe>\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
