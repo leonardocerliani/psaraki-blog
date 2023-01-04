@@ -40,7 +40,7 @@ options(digits = 2)
 
 \
 \
-[Konrad Lorenz](https://en.wikipedia.org/wiki/Konrad_Lorenz) once said that “It is a good morning exercise for a research scientist to discard a pet hypothesis every day before breakfast. It keeps him young” ([ref](https://www.oxfordreference.com/display/10.1093/acref/9780191826719.001.0001/q-oro-ed4-00006809;jsessionid=09C85D7EBCE0EBCDD5B27E04309183FE)). Having spent quite some years doing scientific research, I can comfortably say that this is one of the mantra for the morning ritual of every researcher. Another useful mantra on the same line is a quote by [Richard Feynman](https://en.wikipedia.org/wiki/Richard_Feynman): “you must not fool yourself and you are the easiest person to fool” ([ref](https://archive.org/details/RICHARDP.FEYNMANSURELYYOUREJOKINGMR.FEYNMAN/page/n7/mode/2up?q=%22you+are+the+easiest+person+to+fool%22)).
+[Konrad Lorenz](https://en.wikipedia.org/wiki/Konrad_Lorenz){target="_blank"} once said that “It is a good morning exercise for a research scientist to discard a pet hypothesis every day before breakfast. It keeps him young” ([ref](https://www.oxfordreference.com/display/10.1093/acref/9780191826719.001.0001/q-oro-ed4-00006809;jsessionid=09C85D7EBCE0EBCDD5B27E04309183FE){target="_blank"}). Having spent quite some years doing scientific research, I can comfortably say that this is one of the mantra for the morning ritual of every researcher. Another useful mantra on the same line is a quote by [Richard Feynman](https://en.wikipedia.org/wiki/Richard_Feynman){target="_blank"}: “you must not fool yourself and you are the easiest person to fool” ([ref](https://archive.org/details/RICHARDP.FEYNMANSURELYYOUREJOKINGMR.FEYNMAN/page/n7/mode/2up?q=%22you+are+the+easiest+person+to+fool%22){target="_blank"}).
 
 From a practical standpoint, these two quotes provide an interesting perspective on why I think visualization is so useful and actually indispensable for a researcher and for everyone who works with data: **images are a great device to show us when our hypotheses about the data we are working on are correct _and_ when they are wrong** (or when there is something wrong in the data).
 
@@ -58,7 +58,10 @@ At this point, we might think about creating a device that allows us to look at 
 
 Not necessarily exploring data will prompt us to create an interactive app all the time, however its utility might become apparent for instance if we realize that such exploration steps might be useful for similar datasets in the future. 
 
-You can find the code for the static visualization in this post, while the code for the interactive version - a [Shiny app](https://shiny.rstudio.com/) - can be found in [this github repo](https://github.com/leonardocerliani/neuroimaging_dimred/blob/main/app.R).
+
+### Github repos
+- [for this RMarkdown document](https://github.com/leonardocerliani/psaraki-blog/blob/main/apps/dimred_app/dimred_app.Rmd){target="_blank"}
+- [for the interactive Shiny app](https://github.com/leonardocerliani/neuroimaging_dimred){target="_blank"} - which can be opened in full page on [shinyapps.io](https://agronomous.shinyapps.io/neuroimaging_dimred/){target="_blank"}
 
 _Caveat: the data in this example are totally made up, they do not come from an actual experiement, since the aim is to show the potential of building such a tool. However, this machinery can be easily adapted to real data and personalized to the need of the investigator._
 
@@ -175,7 +178,7 @@ Now the situation appears much more clear than when we looked at the data at the
 
 
 ## A different visualization
-Consider however that here we are looking only at 9 brain regions, while in reality - in a whole-brain analysis - we look at least at 50+ regions (e.g. the 52 [Brodmann areas](https://en.wikipedia.org/wiki/Brodmann_area)). That is why I prefer to look at the same result with a graphical representation such as the following one.
+Consider however that here we are looking only at 9 brain regions, while in reality - in a whole-brain analysis - we look at least at 50+ regions (e.g. the 52 [Brodmann areas](https://en.wikipedia.org/wiki/Brodmann_area){target="_blank"}). That is why I prefer to look at the same result with a graphical representation such as the following one.
 
 _NB: in the following graph you can select specific tasks by clicking on the legend_
 
@@ -218,7 +221,7 @@ draw_spiderplot(t_df_mean)
 ## Reducing the dimensionality for a sharper view
 I find this visualization much easier to inspect than the table above. However, you might have noticed that we don't know anymore what is going on at the level of the single participants. Of course are insights on the results so far are purely based on descriptive statistics, and appropriate inferential methods (e.g. ANOVA) will tell us whether the variability across tasks is substantially higher than that between participants. However, it can be useful to have a first look into this by looking at the main trajectories of variability across the entire initial dataset. 
 
-Let's see for instance what happens when we feed our initial participants-by-brain region table into [UMAP](https://umap-learn.readthedocs.io/en/latest/). 
+Let's see for instance what happens when we feed our initial participants-by-brain region table into [UMAP](https://umap-learn.readthedocs.io/en/latest/){target="_blank"}. 
 
 
 ```{r}
@@ -294,11 +297,11 @@ We have seen so far how many questions naturally arise even when looking at a in
 
 If you read so far you have probably come up with a few other features that you would like to explore in one of the proposed visualization, and see how they affect the other perspectives from which we can look at the data. 
 
-It is probably clear by now that I am very intrigued by the possibility of exploration offered by dimensionality reduction methods such as UMAP. In the app which is displayed below, that you can [open in full screen here](https://agronomous.shinyapps.io/neuroimaging_dimred/), I implemented a few other possibilities that I encourage you to explore:
+It is probably clear by now that I am very intrigued by the possibility of exploration offered by dimensionality reduction methods such as UMAP. In the app which is displayed below, that you can [open in full screen here](https://agronomous.shinyapps.io/neuroimaging_dimred/){target="_blank"}, I implemented a few other possibilities that I encourage you to explore:
 
 - For instance, we might want to assess - for data exploration or based on a specific hypothesis - whether the expected effect would hold if you **consider only a subset of the brain regions** we looked at. This can be done by selecting the regions in the table, and observing the effect in the low-dimensional embedding.
 
-- We might also want to try to **use other dimensionality reduction methoods** besides UMAP (check for instance [here](https://cmdlinetips.com/2022/07/dimensionality-reduction-techniques-in-r/)). In the app, there is a choice of three different methods: Multi-dimensional Scaling (from the [stats](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cmdscale) package), tSNE (from the [Rtsne](https://cran.r-project.org/web/packages/Rtsne/index.html) package) and UMAP (from the [uwot](https://cran.r-project.org/web/packages/uwot/index.html) package).
+- We might also want to try to **use other dimensionality reduction methoods** besides UMAP (check for instance [here](https://cmdlinetips.com/2022/07/dimensionality-reduction-techniques-in-r/){target="_blank"}). In the app, there is a choice of three different methods: Multi-dimensional Scaling (from the [stats](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cmdscale){target="_blank"} package), tSNE (from the [Rtsne](https://cran.r-project.org/web/packages/Rtsne/index.html){target="_blank"} package) and UMAP (from the [uwot](https://cran.r-project.org/web/packages/uwot/index.html){target="_blank"} package).
 
 - Also, to **inspect the original values for each participant in each task**, you just have to draw a lasso around the points you are interested in the low-dimensional embedding, and a heatmap of those values will appear in the lower-right corner of the app
 
@@ -306,7 +309,7 @@ Hopefully the potential usage of the app are self-explanatory, but if in doubt, 
 
 
 ```{r echo=FALSE}
-knitr::include_app("https://agronomous.shinyapps.io/neuroimaging_dimred/", height = 2000)
+knitr::include_app("https://agronomous.shinyapps.io/neuroimaging_dimred/", height = 2100)
 ```
 
 
@@ -315,7 +318,7 @@ This post has already become much bigger than what I expected. I hope you found 
 
 I just want to offer two small considerations to conclude. 
 
-- Building an interactive app for data exploration/analysis is something that I dreamt about ever since I started to learn Matlab many years ago. Nowadays with the introduction of libraries such as [Shiny](https://shiny.rstudio.com/) for R (and recently also for Python), it has become a task that **anyone with an interest in coding can get started with in a relatively short time**, and that I personally find satisfying on many different levels. When you get a bit of experience, prototyping a basic app can take as short as one or a few days (as a matter of fact it took me way more time to write this post than the app)
+- Building an interactive app for data exploration/analysis is something that I dreamt about ever since I started to learn Matlab many years ago. Nowadays with the introduction of libraries such as [Shiny](https://shiny.rstudio.com/){target="_blank"} for R (and recently also for Python), it has become a task that **anyone with an interest in coding can get started with in a relatively short time**, and that I personally find satisfying on many different levels. When you get a bit of experience, prototyping a basic app can take as short as one or a few days (as a matter of fact it took me way more time to write this post than the app)
 
 - In this example I looked only at the participant-level results. Instead **in neuroimaging a large amount of time and code is spent on pre-processing the data and checking the results of the many steps involved therein** - e.g. checking the outcome of registering one brain to a template, or the whole-brain temporal profile of an fMRI volume after bandpass filtering or de-noising. Although many neuroimaging suite already did a great job in implementing GUIs, you might want to look into other features which are not currently offered, or you might just want to implement an interface for the pre-processing pipelines you wrote. Having this in mind, I believe that libraries like Shiny  bring a great potential for developing such personalized tools for researcher in neuroimaging.  
 
