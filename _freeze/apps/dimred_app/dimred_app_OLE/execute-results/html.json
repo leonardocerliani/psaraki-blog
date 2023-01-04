@@ -1,0 +1,14 @@
+{
+  "hash": "d59682a8aa77e3f74113d6ee4f3f1c64",
+  "result": {
+    "markdown": "---\ntitle: \"Dimred app OLE\"\nauthor: \"LC\"\ndate: \"2022-12-22\"\ncategories: [shiny app,neuroimaging]\nimage: \"dimred_neuroimaging.jpg\"\nabstract: \"Exploring multidimensional imaging results\"\nexecute:\n  echo: true\npage-layout: article\n\n---\n\n\n\n\n\n# Pippero\n\n![](dimred.gif)\n\n# The app\n\n\n\n::: {.cell}\n<iframe src=\"https://agronomous.shinyapps.io/neuroimaging_dimred/?showcase=0\" width=\"672\" height=\"2000\" data-external=\"1\"></iframe>\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
