@@ -17,11 +17,11 @@ website:
         
 format:
   html:
-    theme: journal
-    max-width: 300px
-    mainfont: Georgia
-    css: styles.css
+    theme: simplex
+    fontsize: 1.1em
     page-layout: article
+    css: styles.css
 
-editor: visual
+editor: source
+
 

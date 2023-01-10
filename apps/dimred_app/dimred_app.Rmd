@@ -1,5 +1,5 @@
 ---
-title: "Interactive exploration of neuroimaging results"
+title: "Interactive data exploration in neuroimaging: a simple example"
 author: "LC"
 date: "2022-12-28"
 categories: [shiny app,neuroimaging]
@@ -42,7 +42,7 @@ options(digits = 2)
 \
 [Konrad Lorenz](https://en.wikipedia.org/wiki/Konrad_Lorenz){target="_blank"} once said that “It is a good morning exercise for a research scientist to discard a pet hypothesis every day before breakfast. It keeps him young” ([ref](https://www.oxfordreference.com/display/10.1093/acref/9780191826719.001.0001/q-oro-ed4-00006809;jsessionid=09C85D7EBCE0EBCDD5B27E04309183FE){target="_blank"}). Having spent quite some years doing scientific research, I can comfortably say that this is one of the mantra for the morning ritual of every researcher. Another useful mantra on the same line is a quote by [Richard Feynman](https://en.wikipedia.org/wiki/Richard_Feynman){target="_blank"}: “you must not fool yourself and you are the easiest person to fool” ([ref](https://archive.org/details/RICHARDP.FEYNMANSURELYYOUREJOKINGMR.FEYNMAN/page/n7/mode/2up?q=%22you+are+the+easiest+person+to+fool%22){target="_blank"}).
 
-From a practical standpoint, these two quotes provide an interesting perspective on why I think visualization is so useful and actually indispensable for a researcher and for everyone who works with data: **images are a great device to show us when our hypotheses about the data we are working on are correct _and_ when they are wrong** (or when there is something wrong in the data).
+From a practical standpoint, these two quotes provide an interesting perspective on why I think visualization is so useful and actually indispensable for a researcher and for everyone who works with data: **images are a great device to show us when our hypotheses are correct _and_ when they are wrong** (or when there is something wrong in the data).
 
 Visualization is key not just to communicate a complex result in an intuitive way, but also for inspecting every step of the analysis, in order to validate - or invalidate - previous assumptions, avoid wrong conclusions, get useful insights to re(de)fine our hypotheses, and design the next analytic step.
 
@@ -291,7 +291,7 @@ gf %>% show_table()
 ```
 
 
-## Bringing altogether in an interactive app
+## Bringing all together in an interactive app
 
 We have seen so far how many questions naturally arise even when looking at a intentionally very simplified dataset like the one we generated above.
 
